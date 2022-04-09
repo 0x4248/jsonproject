@@ -2,6 +2,14 @@
 Easily manage your projects
 ## What is JSONconfig?
 JSONconfig is a simple, easy to use, and powerful project configuration manager. It is a JSON based configuration project manager that allows you to manage your projects in a simple and easy way. Its just like npm's `package.json` file.
+
+## Installation
+To install JSONconfig, just run the following command:
+
+```
+pip install proactive-jsonconfig
+```
+
 ## Usage
 
 ### Initialize
