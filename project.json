@@ -1,0 +1,15 @@
+{
+    "name": "JSONconfig",
+    "description": "Easily manage your projects with JSON files",
+    "version": "0.1",
+    "author": "Proactive Development",
+    "license": "None",
+    "url": "",
+    "email": "",
+    "languages": [
+        "python"
+    ],
+    "actions": {
+        "run": "python ./src/__main__.py"
+    }
+}
