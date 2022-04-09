@@ -1,29 +1,35 @@
 import json
 import sys
 import os
-verbose = False
+
 def init():
-    if verbose:
-        print("Initializing")
     project = {}
-    project_name = input("Enter project name:")
+    project_name = input("Enter project name: (" +os.path.basename(os.getcwd())+ ") ")
     if project_name == "":
-        print("Project name cannot be empty")
-        sys.exit(1)
+        project_name = os.path.basename(os.getcwd())
     project_description = input("Enter project description:")
-    project_version = input("Enter project version:")
+    project_version = input("Enter project version: (0.1.0) ")
     if project_version == "":
-        print("Project version cannot be empty it is set to 1.0.0")
-        project_version = "1.0.0"
-    project_author = input("Enter project author:")
-    project_license = input("Enter project license:")
-    project_url = input("Enter project url:")
-    project_email = input("Enter project email:")
-        
-    
+        project_version = "0.1.0"
+    project_author = input("Enter project author: (none) ")
+    if project_author == "":
+        project_author = "none"
+    project_main_file = input("Enter main file: (none) ")
+    if project_main_file == "":
+        project_main_file = "none"
+    project_license = input("Enter project license: (none) ")
+    if project_license == "":
+        project_license = "none"
+    project_url = input("Enter project url: (none) ")
+    if project_url == "":
+        project_url = "none"
+    project_email = input("Enter project email: (none) ")
+    if project_email == "":
+        project_email = "none"
     project["name"] = project_name
     project["description"] = project_description
     project["version"] = project_version
+    project["main_file"] = project_main_file
     project["author"] = project_author
     project["license"] = project_license
     project["url"] = project_url
@@ -97,6 +103,9 @@ def init():
                     pass
                 else:
                     project["languages"].append("php")
+    print("Found the following languages: ")
+    for i in project["languages"]:
+        print("\t" + i)
     print("\nPlease enter the actions that you want to add to the project")
     print("Leave blank to skip")
     project_run = input("Enter the command to run the project:")
@@ -115,14 +124,11 @@ def init():
         project["actions"]["install"] = project_install
     if project_clean != "":
         project["actions"]["clean"] = project_clean
-    if input("Is the infomation correct? (y/n)").upper == "Y" or "YES" or "CORRECT":
-        print("Writing to file")
-        with open("project.json", "w") as f:
-            json.dump(project, f, indent=4)
-        print("Done")
-    else:
-        print("Aborting")
-        sys.exit(1)
+    print("Writing to file")
+    with open("project.json", "w") as f:
+        json.dump(project, f, indent=4)
+    print("Done")
+
 
 if __name__ == "__main__":
     for i in sys.argv:
