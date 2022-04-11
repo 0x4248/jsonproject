@@ -49,13 +49,13 @@ It will then create a new project directory and a new `project.json` file.
 }
 ```
 ### Search
-To search for a project, run `jsonproject search`. This will search for a project in the current directory and all subdirectories.
+To search for a project, run `python -m jsonproject search`. This will search for a project in the current directory and all subdirectories.
 ```
 projects in C:\Projects\
 name:Example version:0.1 location:.\example
 ```
 ### Info
-To get information about a project, run `jsonproject info`. This will print out the information about the project.
+To get information about a project, run `python -m jsonproject info`. This will print out the information about the project.
 ```
 name:Example
 version:0.1
@@ -74,3 +74,32 @@ actions:
         install:example install
         uninstall:example uninstall
 ```
+### Install
+The install script is a utility to download multiple files from a `install.project.json` file
+
+To run this do `python -m jsonproject install`.
+
+#### Example of json file
+``` json
+{
+    "name": "example",
+    "dirs": [
+        "src/",
+        "src/js/",
+        "src/css/",
+        "src/img/",
+        "src/fonts/",
+        "src/sass/",
+        "src/html/"
+    ],
+    "download":{
+        "urls":[
+            "example.com/file.txt"
+        ],
+        "names":[
+            "src/file.txt"
+        ]
+    }
+}
+```
+

@@ -1,4 +1,8 @@
 import json
+from msilib.schema import File
+import random
+import shutil
+import requests
 import sys
 import os
 
@@ -164,6 +168,60 @@ if __name__ == "__main__":
                             for action in project["actions"]:
                                 print("\t"+action+":"+project["actions"][action])
                             exit()
+        if i == "install":
+            print("Welcome to the jsonproject install tool")
+            print("This tool is to help you install dependencies or templates for your project")
+            url = input("Enter the url or local location of the setup.project.json file:")
+            if url.startswith("http"):
+                print("Downloading setup.project.json")
+                os.mkdir("jsonproject-temp")
+                os.chdir("jsonproject-temp")
+                open(".gitignore", "w").write("*")
+                r = requests.get(url)
+                with open("setup.project.json", "w") as f:
+                    f.write(r.text)
+                os.chdir("..")
+                print("Downloaded setup.project.json")
+                print("Reading setup.project.json")
+                with open("jsonproject-temp/setup.project.json", "r") as f:
+                    setup = json.load(f)
+                consent = input("Are you sure you want to install "+setup["name"]+" (Y)")
+                if consent.upper() == "Y" or "YES":
+                    pass
+                else:
+                    print("Exiting and cleaning up")
+                    shutil.rmtree("jsonproject-temp")
+                    exit()
+            else:
+                print("Reading file from local location")
+                #open the file as json
+                with open(url, "r") as f:
+                    setup = json.load(f)
+                consent = input("Are you sure you want to install "+setup["name"]+" (Y)")
+                if consent.upper() == "Y" or "YES" or "":
+                    pass
+                else:
+                    print("Exiting")
+                    exit()
+            for i in setup["dirs"]:
+                try:
+                    os.mkdir(i)
+                except FileExistsError:
+                    print("[ SKIPPED ] Directory "+i+" already exists")
+                
+            for i in setup["download"]["urls"]:
+                print("Downloading "+i)
+                try:
+                    r = requests.get(i)
+                except requests.exceptions.ConnectionError:
+                    print("[ ERROR ] Could not connect to "+i)
+                with open(setup["download"]["names"][setup["download"]["urls"].index(i)], "w") as f:
+                    f.write(r.text)
+                print("Downloaded "+i)
+            print("Deleteting temp directory")
+            shutil.rmtree("jsonproject-temp")
+
+
     else:
         if os.path.isfile("project.json"):
             for i in sys.argv:
@@ -174,4 +232,3 @@ if __name__ == "__main__":
         else:
             print("project.json not found create one with the command init")
             exit()
-        
