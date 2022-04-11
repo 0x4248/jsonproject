@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
     
 setup(
-    name='Proactive-JSONconfig',
-    url='https://github.com/Proactive-Development/JSONconfig/',
+    name='jsonproject',
+    url='https://github.com/Proactive-Development/jsonproject/',
     author='Proactive Development',
-    packages=['JSONconfig'],
+    packages=['jsonproject'],
     install_requires=[''],
     version='0.1.1',
     license='NONE',

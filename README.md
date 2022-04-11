@@ -1,21 +1,21 @@
-# JSONconfig
+# Jsonproject
 Easily manage your projects
-## What is JSONconfig?
-JSONconfig is a simple, easy to use, and powerful project configuration manager. It is a JSON based configuration project manager that allows you to manage your projects in a simple and easy way. Its just like npm's `package.json` file.
+## What is jsonproject?
+jsonproject is a simple, easy to use, and powerful project configuration manager. It is a JSON based configuration project manager that allows you to manage your projects in a simple and easy way. Its just like npm's `package.json` file.
 
 ## Installation
-To install JSONconfig, just run the following command:
+To install jsonproject, just run the following command:
 
 ```
-pip install proactive-jsonconfig
+pip install jsonproject
 ```
 
 ## Usage
 
 ### Initialize
-To initialize a new project, run `jsonconfig init`. This will walk you through the process of creating a new project.
+To initialize a new project, run `jsonproject init`. This will walk you through the process of creating a new project.
 
-JSONconfig will ask you for the following information:
+jsonproject will ask you for the following information:
 - Project name
 - Project description
 - Project author
@@ -49,13 +49,13 @@ It will then create a new project directory and a new `project.json` file.
 }
 ```
 ### Search
-To search for a project, run `jsonconfig search`. This will search for a project in the current directory and all subdirectories.
+To search for a project, run `jsonproject search`. This will search for a project in the current directory and all subdirectories.
 ```
 projects in C:\Projects\
 name:Example version:0.1 location:.\example
 ```
 ### Info
-To get information about a project, run `jsonconfig info`. This will print out the information about the project.
+To get information about a project, run `jsonproject info`. This will print out the information about the project.
 ```
 name:Example
 version:0.1
