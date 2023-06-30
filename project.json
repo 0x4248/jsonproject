@@ -1,7 +1,7 @@
 {
     "name": "jsonproject",
     "description": "Easily manage your projects with JSON files",
-    "version": "0.1",
+    "version": "",
     "main_file": "jsonproject/__main__.py",
     "author": "Proactive Development",
     "license": "GNU General Public License v3.0",
