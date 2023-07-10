@@ -3,7 +3,7 @@
     "description": "Easily manage your projects with JSON files",
     "version": "",
     "main_file": "jsonproject/__main__.py",
-    "author": "Proactive Development",
+    "author": "Lewis Evans",
     "license": "GNU General Public License v3.0",
     "url": "",
     "email": "",
