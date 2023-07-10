@@ -13,7 +13,7 @@ pip install jsonproject
 ## Usage
 
 ### Initialize
-To initialize a new project, run `jsonproject init`. This will walk you through the process of creating a new project.
+To initialize a new project, run `python -m jsonproject init`. This will walk you through the process of creating a new project.
 
 jsonproject will ask you for the following information:
 - Project name
