@@ -6,9 +6,10 @@ import requests
 import sys
 import os
 
+
 def init():
     project = {}
-    project_name = input("Enter project name: (" +os.path.basename(os.getcwd())+ ") ")
+    project_name = input("Enter project name: (" + os.path.basename(os.getcwd()) + ") ")
     if project_name == "":
         project_name = os.path.basename(os.getcwd())
     project_description = input("Enter project description:")
@@ -137,41 +138,52 @@ def init():
 if __name__ == "__main__":
     for i in sys.argv:
         if i == "init":
-           init()
-           exit()
+            init()
+            exit()
         if i == "search":
-            print("projects in "+os.getcwd())
+            print("projects in " + os.getcwd())
             for root, dirs, files in os.walk("."):
                 for file in files:
                     if file == "project.json":
                         with open(os.path.join(root, file), "r") as f:
                             project = json.load(f)
-                            print("name:"+project["name"]+" version:"+ project["version"]+" location:"+os.path.dirname(os.path.join(root, file)))
+                            print(
+                                "name:"
+                                + project["name"]
+                                + " version:"
+                                + project["version"]
+                                + " location:"
+                                + os.path.dirname(os.path.join(root, file))
+                            )
         if i == "info":
-            print("Project file in "+os.getcwd())
+            print("Project file in " + os.getcwd())
             for root, dirs, files in os.walk("."):
                 for file in files:
                     if file == "project.json":
                         with open(os.path.join(root, file), "r") as f:
                             project = json.load(f)
-                            print("name:"+project["name"])
-                            print("version:"+project["version"])
-                            print("description:"+project["description"])
-                            print("author:"+project["author"])
-                            print("license:"+project["license"])
-                            print("url:"+project["url"])
-                            print("email:"+project["email"])
+                            print("name:" + project["name"])
+                            print("version:" + project["version"])
+                            print("description:" + project["description"])
+                            print("author:" + project["author"])
+                            print("license:" + project["license"])
+                            print("url:" + project["url"])
+                            print("email:" + project["email"])
                             print("languages:")
                             for language in project["languages"]:
-                                print("\t"+language)
+                                print("\t" + language)
                             print("actions:")
                             for action in project["actions"]:
-                                print("\t"+action+":"+project["actions"][action])
+                                print("\t" + action + ":" + project["actions"][action])
                             exit()
         if i == "install":
             print("Welcome to the jsonproject install tool")
-            print("This tool is to help you install dependencies or templates for your project")
-            url = input("Enter the url or local location of the setup.project.json file:")
+            print(
+                "This tool is to help you install dependencies or templates for your project"
+            )
+            url = input(
+                "Enter the url or local location of the setup.project.json file:"
+            )
             if url.startswith("http"):
                 print("Downloading setup.project.json")
                 os.mkdir("jsonproject-temp")
@@ -185,7 +197,9 @@ if __name__ == "__main__":
                 print("Reading setup.project.json")
                 with open("jsonproject-temp/setup.project.json", "r") as f:
                     setup = json.load(f)
-                consent = input("Are you sure you want to install "+setup["name"]+" (Y)")
+                consent = input(
+                    "Are you sure you want to install " + setup["name"] + " (Y)"
+                )
                 if consent.upper() == "Y" or "YES":
                     pass
                 else:
@@ -194,10 +208,12 @@ if __name__ == "__main__":
                     exit()
             else:
                 print("Reading file from local location")
-                #open the file as json
+                # open the file as json
                 with open(url, "r") as f:
                     setup = json.load(f)
-                consent = input("Are you sure you want to install "+setup["name"]+" (Y)")
+                consent = input(
+                    "Are you sure you want to install " + setup["name"] + " (Y)"
+                )
                 if consent.upper() == "Y" or "YES" or "":
                     pass
                 else:
@@ -207,27 +223,28 @@ if __name__ == "__main__":
                 try:
                     os.mkdir(i)
                 except FileExistsError:
-                    print("[ SKIPPED ] Directory "+i+" already exists")
-                
+                    print("[ SKIPPED ] Directory " + i + " already exists")
+
             for i in setup["download"]["urls"]:
-                print("Downloading "+i)
+                print("Downloading " + i)
                 try:
                     r = requests.get(i)
                 except requests.exceptions.ConnectionError:
-                    print("[ ERROR ] Could not connect to "+i)
-                with open(setup["download"]["names"][setup["download"]["urls"].index(i)], "w") as f:
+                    print("[ ERROR ] Could not connect to " + i)
+                with open(
+                    setup["download"]["names"][setup["download"]["urls"].index(i)], "w"
+                ) as f:
                     f.write(r.text)
-                print("Downloaded "+i)
+                print("Downloaded " + i)
             print("Deleteting temp directory")
             shutil.rmtree("jsonproject-temp")
-
 
     else:
         if os.path.isfile("project.json"):
             for i in sys.argv:
                 project = json.load(open("project.json"))
                 if i in project["actions"]:
-                    print("Running "+i)
+                    print("Running " + i)
                     os.system(project["actions"][i])
         else:
             print("project.json not found create one with the command init")
