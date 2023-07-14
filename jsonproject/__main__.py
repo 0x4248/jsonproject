@@ -8,6 +8,9 @@ import os
 
 
 def init():
+    """
+    This function is used to create a project.json file
+    """
     project = {}
     project_name = input("Enter project name: (" + os.path.basename(os.getcwd()) + ") ")
     if project_name == "":
@@ -31,6 +34,7 @@ def init():
     project_email = input("Enter project email: (none) ")
     if project_email == "":
         project_email = "none"
+    # Put data into project dict
     project["name"] = project_name
     project["description"] = project_description
     project["version"] = project_version
@@ -41,6 +45,7 @@ def init():
     project["email"] = project_email
     print("\nAuto scanning for languages in the project")
     project["languages"] = []
+    # scan for languages
     for root, dirs, files in os.walk("."):
         for file in files:
             if file.endswith(".py") or file.endswith(".pyw"):
